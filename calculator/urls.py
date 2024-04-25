@@ -1,7 +1,8 @@
 from django.urls import path
-from.import views
+from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('result/', views.result, name='result'),
+    path('', views.calculator, name='calculator'),  # Update the name to 'calculator'
+    path('submit_query/', views.submit_query, name='submit_query'),
+
 ]

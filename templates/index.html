@@ -6,25 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Calculator</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+         container {border-style: solid;}
+
+    </style>
 
 </head>
-<body>
-<div class="center">
+<body bgcolor="yellow">
+<center><div class="center">
 <h1>Basic Calculator</h1>
+<div class ="container">
+<form method="GET" action="{% url 'submit_query' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="search" class="form-control" name="query" id="query">
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-success" style="display: block; marginleft: 50 auto;">
+        </div>
+        <div class="col-md-6">
+            <input type="reset" class="btn btn-danger" style="display: block; margin: 50 auto;">
+        </div>
+    </div>
+</form></center>
+</div>
+{% if error %}
+<div class="alert alert-danger mt-3" role="alert">
+    Error: {{ error_message }}
+</div>
+{% endif %}
 
-<form action="result">
-    <input type="number" name="number1" placeholder="Enter first number">
-    <br>
-    <br>
-    <input type="number" name="number2" placeholder="Enter second number">
-    <br>
-    <br>
-    <button type="submit" name="add">Add</button>
-    <button type="submit" name="subtract">Subtract</button>
-    <button type="submit" name="multiply">Multiply</button>
-    <button type="submit" name="divide">Divide</button>
+{% if not error %}
+{% if q %}
+<div class="alert alert-info mt-3" role="alert">
+    Expression: {{ q }}<br>
+    Result: {{ ans }}
+</div>
+{% endif %}
+{% endif %}
 
-</form>
 </div>
 
 </body>

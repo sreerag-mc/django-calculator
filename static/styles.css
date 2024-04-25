@@ -1,7 +1,5 @@
 
   .center {
-    margin: auto;
-    width: 60%;
-    border: 3px solid #a5addb;
-    padding: 10px;
+    p.solid {border-style: solid;}
+
   }

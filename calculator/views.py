@@ -1,31 +1,25 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 def calculator(request):
-	if request.method == 'POST':
-		result = request.POST.get('result', '')
-		return render(request, 'index.html', {'result': result})
+    return render(request, 'index.html')
 
-	return render(request, 'index.html')
+def submit_query(request):
+    q = request.GET.get('query', '')
+    try:
+        ans = eval(q)
+        context = {
+            "q": q,
+            "ans": ans,
+            "error": False
+        }
+    except Exception as e:
+        context = {
+            "error_message": str(e),
+            "error": True,
+        }
+    return render(request, 'index.html', context=context)
 
 
-def result(request):
-	num1 = int(request.GET.get('number1'))
-	num2 = int(request.GET.get('number2'))
-
-	if request.GET.get('add') == "":
-		ans = num1 + num2
-
-	elif request.GET.get('subtract') == "":
-		ans = num1 - num2
-
-	elif request.GET.get('multiply') == "":
-		ans = num1 * num2
-
-	else:
-		ans = num1 / num2
-
-	return render(request, 'result.html', {'ans': ans})
 
 
 
